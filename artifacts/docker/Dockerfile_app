@@ -1,7 +1,10 @@
 FROM centos:centos7
-EXPOSE 80
-ENTRYPOINT ["/init"]
 
+# Descriptions
+MAINTAINER https://www.saritasa.com
+LABEL Vendor="Saritasa" \
+      Project="WordpressFW"
+      
 # System update, add epel-release and instal apache web-server
 RUN yum -y update && yum -y install epel-release && yum -y install httpd unzip
 
@@ -21,7 +24,8 @@ RUN yum-config-manager --enable remi-php72 && yum -y install php php-opcache php
 RUN curl -LSs -o  /tmp/wordpress.zip https://wordpress.org/latest.zip && \
     unzip /tmp/wordpress.zip -d /var/www/html/
 
-
+EXPOSE 80
+ENTRYPOINT ["/init"]
 
 # Add configs
 ADD configs/app/ /

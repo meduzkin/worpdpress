@@ -1,9 +1,12 @@
 FROM centos:centos7
 
+# Descriptions
+MAINTAINER https://www.saritasa.com
+LABEL Vendor="Saritasa" \
+      Project="WordpressFW"
 
 # System update, add epel-release, install redis
 RUN yum -y update && yum -y install epel-release && yum -y install redis
-
 
 # Install s6overlay
 RUN curl -LSs -o /tmp/s6-overlay-amd64.tar.gz \
@@ -14,6 +17,7 @@ RUN curl -LSs -o /tmp/s6-overlay-amd64.tar.gz \
 EXPOSE 6379
 ENTRYPOINT ["/init"]
 
+# Hardcode redis password and ip address.
 RUN echo "requirepass redis_passwd" >> /etc/redis.conf && echo "bind localhost 124.0.0.77" >> /etc/redis.conf
 
 # Add configs

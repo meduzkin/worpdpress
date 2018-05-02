@@ -1,5 +1,10 @@
 FROM centos:centos7
 
+# Descriptions
+MAINTAINER https://www.saritasa.com
+LABEL Vendor="Saritasa" \
+      Project="WordpressFW"
+
 # System update, add epel-release
 RUN yum -y update && yum -y install epel-release && yum -y install wget
 RUN rpm -ivh https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
@@ -14,5 +19,6 @@ RUN curl -LSs -o /tmp/s6-overlay-amd64.tar.gz \
 
 EXPOSE 3306
 ENTRYPOINT ["/bash"]
+
 # Add configs
 ADD configs/mysql/ /
