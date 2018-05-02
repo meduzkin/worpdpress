@@ -1,0 +1,20 @@
+FROM centos:centos7
+
+# System update, add epel-release
+RUN yum -y update && yum -y install epel-release && yum -y install wget
+
+# Install MySQL
+RUN wget https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm -P /tmp/ && \
+    rpm -ivh /tmp/mysql80-community-release-el7-1.noarch.rpm && \
+    yum -y update && yum -y install mysql-server
+
+# Install s6overlay
+RUN curl -LSs -o /tmp/s6-overlay-amd64.tar.gz \
+    https://github.com/just-containers/s6-overlay/releases/download/v1.21.0.0/s6-overlay-amd64.tar.gz && \
+    tar xzf /tmp/s6-overlay-amd64.tar.gz -C / --exclude="./bin" --exclude="./sbin" && \
+    tar xzf /tmp/s6-overlay-amd64.tar.gz -C /usr ./bin
+
+EXPOSE 3306
+ENTRYPOINT ["/init"]
+# Add configs
+ADD configs/mysql/ /

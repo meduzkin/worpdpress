@@ -1,0 +1,19 @@
+FROM centos:centos7
+
+
+# System update, add epel-release, install redis
+RUN yum -y update && yum -y install epel-release && yum -y install redis
+
+
+# Install s6overlay
+RUN curl -LSs -o /tmp/s6-overlay-amd64.tar.gz \
+    https://github.com/just-containers/s6-overlay/releases/download/v1.21.0.0/s6-overlay-amd64.tar.gz && \
+    tar xzf /tmp/s6-overlay-amd64.tar.gz -C / --exclude="./bin" --exclude="./sbin" && \
+    tar xzf /tmp/s6-overlay-amd64.tar.gz -C /usr ./bin
+
+EXPOSE 6379
+ENTRYPOINT ["/init"]
+
+
+# Add configs
+ADD configs/redis/ /

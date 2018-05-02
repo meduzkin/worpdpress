@@ -1,0 +1,27 @@
+FROM centos:centos7
+EXPOSE 80
+ENTRYPOINT ["/init"]
+
+# System update, add epel-release and instal apache web-server
+RUN yum -y update && yum -y install epel-release && yum -y install httpd unzip
+
+# Install s6overlay
+RUN curl -LSs -o /tmp/s6-overlay-amd64.tar.gz \
+    https://github.com/just-containers/s6-overlay/releases/download/v1.21.0.0/s6-overlay-amd64.tar.gz && \
+    tar xzf /tmp/s6-overlay-amd64.tar.gz -C / --exclude="./bin" --exclude="./sbin" && \
+    tar xzf /tmp/s6-overlay-amd64.tar.gz -C /usr ./bin
+
+# Add Remi repo
+RUN rpm -Uvh http://rpms.remirepo.net/enterprise/remi-release-7.rpm && yum -y install yum-utils %% yum -y update
+
+# Install PHP 7.2
+RUN yum-config-manager --enable remi-php72 && yum -y install php php-opcache
+
+# Download and put WordPress into DocumentRoot
+RUN curl -LSs -o  /tmp/wordpress.zip https://wordpress.org/latest.zip && \
+    unzip /tmp/wordpress.zip -d /var/www/html/
+
+
+
+# Add configs
+ADD configs/app/ /
