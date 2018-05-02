@@ -13,6 +13,6 @@ RUN curl -LSs -o /tmp/s6-overlay-amd64.tar.gz \
     tar xzf /tmp/s6-overlay-amd64.tar.gz -C /usr ./bin
 
 EXPOSE 3306
-ENTRYPOINT ["/init"]
+ENTRYPOINT ["/bash"]
 # Add configs
 ADD configs/mysql/ /
