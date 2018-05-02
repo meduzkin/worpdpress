@@ -14,7 +14,7 @@ RUN curl -LSs -o /tmp/s6-overlay-amd64.tar.gz \
 EXPOSE 6379
 ENTRYPOINT ["/init"]
 
-RUN echo "requirepass redis_passwd" >> /etc/redis.conf && echo "bind localhost 127.0.0.77" >> /etc/redis.conf
+RUN echo "requirepass redis_passwd" >> /etc/redis.conf && echo "bind localhost 124.0.0.77" >> /etc/redis.conf
 
 # Add configs
 ADD configs/redis/ /
