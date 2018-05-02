@@ -1,3 +1,2 @@
 #!/usr/bin/env bash
-exec systemctl enable mysqld
-exec systemctl start mysqld
+exec /usr/sbin/mysqld --user=mysql

@@ -1,0 +1,1 @@
+chown mysql:mysql /tmp/mysql.socket*

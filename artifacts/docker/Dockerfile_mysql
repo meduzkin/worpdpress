@@ -18,7 +18,9 @@ RUN curl -LSs -o /tmp/s6-overlay-amd64.tar.gz \
     tar xzf /tmp/s6-overlay-amd64.tar.gz -C /usr ./bin
 
 EXPOSE 3306
-ENTRYPOINT ["/bash"]
+ENTRYPOINT ["/init"]
 
 # Add configs
 ADD configs/mysql/ /
+#ENTRYPOINT ["/usr/sbin/mysqld --user=mysql"]
+RUN echo "mysqld: ALL" >> /etc/hosts.allow

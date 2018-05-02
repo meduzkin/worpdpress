@@ -51,4 +51,4 @@ networks:
     ipam:
      config:
        - subnet: 124.0.0.0/24
-         gateway: 124.0.0.7
+         gateway: 124.0.0.1
