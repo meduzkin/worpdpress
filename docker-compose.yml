@@ -30,7 +30,7 @@ services:
  mysql-db:
      build:
          context: .
-         dockerfile: docker/Dockerfile.mysql
+         dockerfile: docker/Dockerfile_mysql
      image: wp-mysql
      hostname: wp-mysql
      container_name: wp-mysql
