@@ -4,6 +4,7 @@
 <p>On your workstation should be installed:<br />Docker<br />Docker-compose</p>
 <h2>Install</h2>
 <p>In the main folder with the docker-compose.yml file, run the following commands:</p>
+<p>$ docker-compose build</p>
 <p>$ docker-compose up</p>
 <p>After it you can/should:<br />1. Open in your favourite browser http://124.0.0.76:80/<br />2. Enjoy</p>
 <h2><br />Features</h2>
