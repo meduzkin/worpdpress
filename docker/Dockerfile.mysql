@@ -12,5 +12,11 @@ RUN curl -LSs -o /tmp/s6-overlay-amd64.tar.gz \
     https://github.com/just-containers/s6-overlay/releases/download/v1.21.0.0/s6-overlay-amd64.tar.gz && \
     tar xzf /tmp/s6-overlay-amd64.tar.gz -C / --exclude="./bin" --exclude="./sbin" && \
     tar xzf /tmp/s6-overlay-amd64.tar.gz -C /usr ./bin
-ENTRYPOINT ["/init"]
+ADD configs/mariadb/ /
+# Hardcode
+RUN mysqld_safe & until mysqladmin ping; do sleep 1; done && \
+    mysql -uroot -e "CREATE DATABASE somedb;" && \
+    mysql -uroot -e "CREATE USER 'someuser'@'localhost' IDENTIFIED BY 'somepassword';" && \
+    mysql -uroot -e "GRANT ALL PRIVILEGES ON somedb.* TO 'someuser' IDENTIFIED BY 'somepassword' WITH GRANT OPTION;"
 CMD ["usr/bin/mysqld_safe"]
+ENTRYPOINT ["/init"]

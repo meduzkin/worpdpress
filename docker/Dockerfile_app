@@ -6,7 +6,7 @@ LABEL Vendor="Saritasa" \
       Project="WordpressFW"
 
 # System update, add epel-release and instal apache web-server
-RUN yum -y update && yum -y install epel-release && yum -y install httpd unzip
+RUN yum -y update && yum -y install epel-release && yum -y install httpd unzip mysql
 
 # Install s6overlay
 RUN curl -LSs -o /tmp/s6-overlay-amd64.tar.gz \
