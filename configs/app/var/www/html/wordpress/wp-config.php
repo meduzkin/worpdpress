@@ -64,6 +64,12 @@ define('DB_COLLATE', '');
  */
 $table_prefix  = 'wp_';
 
+$redis_server = array(
+    'host'     => '124.0.0.77',
+    'port'     => 6379,
+    'auth'     => 'redis_passwd',
+    'database' => 0, // Optionally use a specific numeric Redis database. Default is 0.
+);
 /**
  * For developers: WordPress debugging mode.
  *
