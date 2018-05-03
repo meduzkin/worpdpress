@@ -13,8 +13,6 @@ services:
      networks:
          deep:
              ipv4_address: 124.0.0.76
-     links:
-        - redis
 
  redis:
      build:
@@ -29,11 +27,12 @@ services:
          deep:
              ipv4_address: 124.0.0.77
 
-
  mysql-db:
-     image: mysql:5.7
+     build:
+         context: .
+         dockerfile: artifacts/docker/Dockerfile_mysql
+     image: wp-mysql
      hostname: wp-mysql
-     restart: always
      container_name: wp-mysql
      environment:
          MYSQL_ROOT_PASSWORD: password
@@ -45,7 +44,6 @@ services:
      networks:
          deep:
              ipv4_address: 124.0.0.78
-
 
 networks:
   deep:

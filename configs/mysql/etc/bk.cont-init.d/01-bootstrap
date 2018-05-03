@@ -1,1 +1,2 @@
+#!/usr/bin/with-contenv bash
 chown mysql:mysql /tmp/mysql.socket*

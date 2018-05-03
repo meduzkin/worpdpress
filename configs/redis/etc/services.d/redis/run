@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-exec redis-server
+exec redis-server /etc/redis.conf
