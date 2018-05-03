@@ -15,8 +15,8 @@ RUN curl -LSs -o /tmp/s6-overlay-amd64.tar.gz \
 ADD configs/mariadb/ /
 # Hardcode
 RUN mysqld_safe & until mysqladmin ping; do sleep 1; done && \
-    mysql -uroot -e "CREATE DATABASE somedb;" && \
-    mysql -uroot -e "CREATE USER 'someuser'@'localhost' IDENTIFIED BY 'somepassword';" && \
-    mysql -uroot -e "GRANT ALL PRIVILEGES ON somedb.* TO 'someuser' IDENTIFIED BY 'somepassword' WITH GRANT OPTION;"
+    mysql -uroot -e "CREATE DATABASE wpdb;" && \
+    mysql -uroot -e "CREATE USER 'wpuser'@'localhost' IDENTIFIED BY 'wppasswd';" && \
+    mysql -uroot -e "GRANT ALL PRIVILEGES ON wpdb.* TO 'wpuser' IDENTIFIED BY 'wppasswd' WITH GRANT OPTION;"
 CMD ["usr/bin/mysqld_safe"]
 ENTRYPOINT ["/init"]
