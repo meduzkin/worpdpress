@@ -23,6 +23,9 @@ RUN yum-config-manager --enable remi-php72 && yum -y install php php-mysql php-x
 # Download and put WordPress into DocumentRoot
 RUN curl -LSs -o  /tmp/wordpress.zip https://wordpress.org/latest.zip && \
     unzip /tmp/wordpress.zip -d /var/www/html/
+# Download phpsession plugin
+RUN curl -LSs -o /tmp/wpsession.zip https://downloads.wordpress.org/plugin/wp-native-php-sessions.0.6.7.zip && \
+    unzip /tmp/wpsession.zip -d /var/www/html/wordpress/wp-content/plugins/
 
 EXPOSE 80
 ENTRYPOINT ["/init"]
